@@ -24,10 +24,11 @@ const (
 )
 
 type SessionConfig struct {
-	RedisHost string        //redis host.default is (127.0.0.1:6379)
-	RedisDB   int           //redis db.default is 13
-	Prefix    string        //redis session key prefix. default is `redissession-`
-	LifeTime  time.Duration //session lifetime.defualt is 1 hour.
+	RedisHost     string        //redis host.default is (127.0.0.1:6379)
+	RedisDB       int           //redis db.default is 13
+	Prefix        string        //redis session key prefix. default is `redissession-`
+	LifeTime      time.Duration //session lifetime.defualt is 1 hour.
+	RedisPassword string        //redis Password if needs
 }
 
 type Session interface {
@@ -95,6 +96,10 @@ func (session *RedisSession) init() {
 	opt.DialTimeout = 60 * time.Second
 	opt.MaxRetries = 5
 	opt.PoolTimeout = 120 * time.Second
+
+	if len(session.config.RedisPassword) > 0 {
+		opt.Password = session.config.RedisPassword
+	}
 	redisConnectionPool = redis.NewClient(opt)
 	session.db = redisConnectionPool
 }

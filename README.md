@@ -119,5 +119,6 @@ type SessionConfig struct {
        	RedisDB   int           //redis db.default is 13
        	Prefix    string        //redis session key prefix. default is `redissession-`
        	LifeTime  time.Duration //session lifetime.defualt is 1 hour.
+        RedisPassword string        //redis Password if needs
 }
 ```

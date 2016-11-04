@@ -17,7 +17,7 @@ import (
 )
 
 const (
-	DefaultRedisHost = "127.0.0.1:3306"
+	DefaultRedisHost = "127.0.0.1:6379"
 	DefaultRedisDB   = 13
 	DefaultPrefix    = "redissession-"
 	DefaultLifeTime  = 3600 * time.Second
